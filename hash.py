@@ -12,12 +12,12 @@ def get_link(cursor, hashed):
     return link[0]
 
 
-def add_link(cursor, link, domain):
+def add_link(cursor, link, domain, lastHashFile):
     """
     update database with new link
     return hashed link
     """
-    hashed = get_new_hash()
+    hashed = get_new_hash(lastHashFile)
     hashedLink = f"{domain}{hashed}"
     if link is not None and "http" not in link:
         link = f"https://{link}"
@@ -31,16 +31,16 @@ def add_link(cursor, link, domain):
 """-----------------------------INTERNAL LOGIC-----------------------------"""
 
 
-def get_new_hash():
+def get_new_hash(fname):
     """
     return next hash
     """
-    with open('lastHash.txt', 'r', encoding="utf-8") as fr:
+    with open(fname, 'r', encoding="utf-8") as fr:
         oldHash = fr.read().strip()
         if oldHash == '':
             oldHash = '/'   # symbol before '0' in ASCII
     newHash = iter_hash(oldHash, len(oldHash)-1)
-    with open('lastHash.txt', 'w', encoding="utf-8") as fw:
+    with open(fname, 'w', encoding="utf-8") as fw:
         fw.write(newHash)
     return newHash
 

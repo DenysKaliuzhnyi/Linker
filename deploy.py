@@ -6,6 +6,7 @@ from hash import get_link, add_link
 
 curdir = os.getcwd()
 datafile = f"{curdir}/links.db"
+lastHashFile = f"{curdir}/lastHash.txt"
 indexfile = 'index.html'
 DOMAIN = "https://evo-linker.herokuapp.com/"
 
@@ -37,7 +38,7 @@ def getvalue():
     cursor = conn.cursor()
 
     link = request.form['link']
-    hashedLink = add_link(cursor, link, DOMAIN)
+    hashedLink = add_link(cursor, link, DOMAIN, lastHashFile)
 
     conn.commit()
     cursor.close()
