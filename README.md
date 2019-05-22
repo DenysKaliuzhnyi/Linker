@@ -1,4 +1,4 @@
-# evo-linker
+# linker
 Web app that allows to shorten links.
 
 You can find this app at https://evo-linker.herokuapp.com/
