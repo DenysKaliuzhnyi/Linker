@@ -7,7 +7,7 @@ from hash import get_link, add_link
 curdir = os.getcwd()
 datafile = f"{curdir}/links.db"
 indexfile = 'index.html'
-URL = "https://evo-linker.herokuapp.com/"
+DOMAIN = "https://evo-linker.herokuapp.com/"
 
 app = Flask(__name__)
 sslify = SSLify(app)
@@ -37,8 +37,7 @@ def getvalue():
     cursor = conn.cursor()
 
     link = request.form['link']
-    hashed = add_link(cursor, link)
-    hashedLink = f"{URL}{hashed}"
+    hashedLink = add_link(cursor, link, DOMAIN)
 
     conn.commit()
     cursor.close()
