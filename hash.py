@@ -5,10 +5,13 @@ def get_link(cursor, hashed):
     """
     return link that corresponds hashed
     """
-    sql = f"SELECT origin FROM links WHERE hash LIKE '%{hashed}%'"
+    sql = f"SELECT origin FROM links WHERE hash LIKE '%/{hashed}_]%'"
     link = cursor.execute(sql).fetchone()
     if link is None:
-        return link
+        sql = f"SELECT origin FROM links WHERE hash LIKE '%/{hashed}_,%'"
+        link = cursor.execute(sql).fetchone()
+    if link is None:
+        return None
     return link[0]
 
 
