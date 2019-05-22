@@ -1,12 +1,11 @@
-import sqlite3, os
+import sqlite3
 from flask import Flask, render_template, request, redirect
 from flask_sslify import SSLify
 from hash import get_link, add_link
 
 
-curdir = os.getcwd()
-datafile = f"{curdir}/links.db"
-lastHashFile = f"{curdir}/lastHash.txt"
+datafile = "links.db"
+lastHashFile = "lastHash.txt"
 indexfile = 'index.html'
 DOMAIN = "https://evo-linker.herokuapp.com/"
 
